@@ -1,5 +1,6 @@
 package com.tabletennis.infrastructure.db;
 
+import com.tabletennis.core.room.UserRoomTeams;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -22,8 +23,3 @@ public class UserRoomRow extends EntityBase {
     private UserRoomTeams team;
 }
 
-enum UserRoomTeams {
-
-    RED,
-    BLUE
-}
