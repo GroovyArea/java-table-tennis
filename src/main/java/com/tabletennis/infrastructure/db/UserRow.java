@@ -1,9 +1,7 @@
 package com.tabletennis.infrastructure.db;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import com.tabletennis.core.user.UserStatus;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -14,6 +12,7 @@ import lombok.*;
 @Table(name = "users")
 public class UserRow extends EntityBase {
 
+    @Column(name = "faker_id")
     private Long fakerId;
 
     private String name;
@@ -21,12 +20,7 @@ public class UserRow extends EntityBase {
     private String email;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private UserStatus status;
 }
 
-enum UserStatus {
-
-    WAIT,
-    ACTIVE,
-    NON_ACTIVE;
-}

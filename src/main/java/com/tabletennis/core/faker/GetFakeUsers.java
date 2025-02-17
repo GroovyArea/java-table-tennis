@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface GetFakeUsers {
 
-    public List<FakeUser> get(
+    List<FakeUser> get(
             int seed,
             int quantity
     );

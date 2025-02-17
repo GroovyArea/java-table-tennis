@@ -1,5 +1,7 @@
 package com.tabletennis.infrastructure.db;
 
+import com.tabletennis.core.room.RoomStatus;
+import com.tabletennis.core.room.RoomTypes;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -25,15 +27,3 @@ public class RoomRow extends EntityBase{
     private RoomStatus status;
 }
 
-enum RoomTypes {
-
-    SINGLE,
-    DOUBLE,
-}
-
-enum RoomStatus {
-
-    WAIT,
-    PROGRESS,
-    FINISH;
-}
