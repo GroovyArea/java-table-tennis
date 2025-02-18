@@ -1,4 +1,4 @@
-package com.tabletennis.infrastructure.db;
+package com.tabletennis.infrastructure.db.user;
 
 import com.tabletennis.core.user.UserWriter;
 import lombok.RequiredArgsConstructor;

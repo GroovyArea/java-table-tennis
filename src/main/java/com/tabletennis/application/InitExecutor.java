@@ -1,4 +1,4 @@
-package com.tabletennis.api.usecase;
+package com.tabletennis.application;
 
 import com.tabletennis.core.faker.FakeUser;
 import com.tabletennis.core.faker.GetFakeUsers;

@@ -1,6 +1,5 @@
 package com.tabletennis.core.user;
 
-import com.tabletennis.infrastructure.db.JpaUserDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

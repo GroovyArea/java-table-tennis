@@ -1,6 +1,6 @@
 package com.tabletennis.core.user;
 
-import com.tabletennis.infrastructure.db.UserRow;
+import com.tabletennis.infrastructure.db.user.UserRow;
 
 import java.util.List;
 

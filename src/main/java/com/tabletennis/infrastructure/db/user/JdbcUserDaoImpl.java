@@ -1,4 +1,4 @@
-package com.tabletennis.infrastructure.db;
+package com.tabletennis.infrastructure.db.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
