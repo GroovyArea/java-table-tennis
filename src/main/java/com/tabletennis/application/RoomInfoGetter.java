@@ -1,5 +1,8 @@
 package com.tabletennis.application;
 
+import com.tabletennis.api.common.ApiErrorException;
+import com.tabletennis.api.common.MetaCode;
+import com.tabletennis.api.response.RoomDetailInfoResponse;
 import com.tabletennis.api.response.TotalRoomsResponse;
 import com.tabletennis.core.room.Room;
 import com.tabletennis.core.room.RoomReader;
@@ -20,7 +23,7 @@ public class RoomInfoGetter {
 
         var roomList = pagedRooms.data()
                 .stream()
-                .map(this::toResponse)
+                .map(this::toListResponse)
                 .toList();
 
         return TotalRoomsResponse.builder()
@@ -30,13 +33,34 @@ public class RoomInfoGetter {
                 .build();
     }
 
-    private TotalRoomsResponse.Room toResponse(Room room) {
+    public RoomDetailInfoResponse getDetail(
+            long roomId
+    ) {
+        return roomReader.findRoomBy(roomId)
+                .map(this::toDetailResponse)
+                .orElseThrow(() -> new ApiErrorException(MetaCode.CREATED));
+    }
+
+
+    private TotalRoomsResponse.Room toListResponse(Room room) {
         return TotalRoomsResponse.Room.builder()
                 .id((int) room.getId())
                 .title(room.getTitle())
                 .hostId((int) room.getHost())
                 .roomType(room.getRoomType())
                 .status(room.getStatus())
+                .build();
+    }
+
+    private RoomDetailInfoResponse toDetailResponse(Room room) {
+        return RoomDetailInfoResponse.builder()
+                .id((int) room.getId())
+                .title(room.getTitle())
+                .hostId((int) room.getHost())
+                .roomType(room.getRoomType())
+                .status(room.getStatus())
+                .createdAt(room.getCreatedAt())
+                .updatedAt(room.getUpdatedAt())
                 .build();
     }
 }
