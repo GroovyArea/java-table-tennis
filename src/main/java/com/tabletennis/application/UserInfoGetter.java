@@ -1,17 +1,14 @@
 package com.tabletennis.application;
 
 import com.tabletennis.api.response.TotalUsersResponse;
-import com.tabletennis.core.common.PagedModel;
 import com.tabletennis.core.user.User;
 import com.tabletennis.core.user.UserReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
-public class UserGetter {
+public class UserInfoGetter {
 
     private final UserReader userReader;
 
@@ -19,7 +16,7 @@ public class UserGetter {
             int size,
             int page
     ) {
-        var pagedUsers = userReader.getPagedUsers(page, size);
+        var pagedUsers = userReader.findAllBy(page, size);
 
         var userList = pagedUsers.data()
                 .stream()
