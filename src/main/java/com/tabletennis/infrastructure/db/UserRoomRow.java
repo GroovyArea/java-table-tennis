@@ -1,6 +1,6 @@
 package com.tabletennis.infrastructure.db;
 
-import com.tabletennis.core.room.UserRoomTeams;
+import com.tabletennis.core.room.vo.UserRoomTeams;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

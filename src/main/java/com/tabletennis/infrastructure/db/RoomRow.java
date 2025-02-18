@@ -1,7 +1,7 @@
 package com.tabletennis.infrastructure.db;
 
-import com.tabletennis.core.room.RoomStatus;
-import com.tabletennis.core.room.RoomTypes;
+import com.tabletennis.core.room.vo.RoomStatus;
+import com.tabletennis.core.room.vo.RoomTypes;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

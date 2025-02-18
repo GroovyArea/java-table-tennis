@@ -1,6 +1,6 @@
 package com.tabletennis.infrastructure.db;
 
-import com.tabletennis.core.user.UserStatus;
+import com.tabletennis.core.user.vo.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 

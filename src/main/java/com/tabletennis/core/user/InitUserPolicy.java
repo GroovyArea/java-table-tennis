@@ -1,5 +1,6 @@
 package com.tabletennis.core.user;
 
+import com.tabletennis.core.user.vo.UserStatus;
 import com.tabletennis.infrastructure.db.UserRow;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -43,7 +44,7 @@ public class InitUserPolicy {
         return status;
     }
 
-    public static record User(
+    public record User(
             long fakerId,
             String userName,
             String email
