@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class DbUserReader implements UserReader {
@@ -15,7 +17,7 @@ public class DbUserReader implements UserReader {
     private final JpaUserDao jpaUserDao;
 
     @Override
-    public PagedModel<User> getPagedUsers(int page, int size) {
+    public PagedModel<User> findAllBy(int page, int size) {
         var pageable = PageRequest.of(page, size);
         Page<UserRow> userRowPage = jpaUserDao.findAll(pageable);
 
@@ -29,6 +31,11 @@ public class DbUserReader implements UserReader {
                 .totalPages(userRowPage.getTotalPages())
                 .data(users)
                 .build();
+    }
+
+    @Override
+    public Optional<User> findBy(long userId) {
+        return jpaUserDao.findById(userId).map(this::mapToEntity);
     }
 
     private User mapToEntity(UserRow userRow) {

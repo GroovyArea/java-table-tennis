@@ -21,6 +21,14 @@ public class ApiResponse<T> {
         );
     }
 
+    public static <T> ApiResponse<T> okWithNoContent() {
+        return new ApiResponse<>(
+                MetaCode.SUCCESS.getCode(),
+                "API 요청이 성공했습니다.",
+                null
+        );
+    }
+
     public static <T> ApiResponse<T> created() {
         return new ApiResponse<>(
                 MetaCode.CREATED.getCode(),

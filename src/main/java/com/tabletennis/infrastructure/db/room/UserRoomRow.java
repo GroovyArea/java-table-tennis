@@ -16,11 +16,20 @@ import lombok.*;
 @Table(name = "user_rooms")
 public class UserRoomRow extends EntityBase {
 
-    private Long roomId;
+    private long roomId;
 
-    private Long userId;
+    private long userId;
 
     @Enumerated(EnumType.STRING)
     private UserRoomTeams team;
+
+    public static UserRoomRow ofFirstUserRoom(long roomId, long userId) {
+        return UserRoomRow.builder()
+                .roomId(roomId)
+                .userId(userId)
+                .team(UserRoomTeams.RED)
+                .build();
+    }
 }
+
 

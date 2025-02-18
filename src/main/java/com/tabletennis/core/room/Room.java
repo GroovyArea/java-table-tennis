@@ -18,7 +18,18 @@ public class Room {
 
     private long id;
     private String title;
-    private Long host;
+    private long host;
     private RoomTypes roomType;
     private RoomStatus status;
+
+    public static Room of(
+            String title, long host, RoomTypes roomType
+    ) {
+        return Room.builder()
+                .title(title)
+                .host(host)
+                .roomType(roomType)
+                .status(RoomStatus.WAIT)
+                .build();
+    }
 }
