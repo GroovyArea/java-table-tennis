@@ -24,8 +24,9 @@ public class Room implements PagedDomain {
     private long host;
     private RoomTypes roomType;
     private RoomStatus status;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private boolean isFull;
 
     public static Room of(
             String title, long host, RoomTypes roomType
@@ -36,5 +37,9 @@ public class Room implements PagedDomain {
                 .roomType(roomType)
                 .status(RoomStatus.WAIT)
                 .build();
+    }
+
+    public boolean isWait() {
+        return status == RoomStatus.WAIT;
     }
 }

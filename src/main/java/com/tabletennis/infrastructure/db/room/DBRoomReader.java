@@ -3,11 +3,14 @@ package com.tabletennis.infrastructure.db.room;
 import com.tabletennis.core.common.PagedModel;
 import com.tabletennis.core.room.Room;
 import com.tabletennis.core.room.RoomReader;
+import com.tabletennis.core.room.vo.RoomStatus;
+import com.tabletennis.core.room.vo.RoomTypes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -18,8 +21,8 @@ public class DBRoomReader implements RoomReader {
     private final JpaRoomDao jpaRoomDao;
 
     @Override
-    public Optional<UserRoomRow> findBy(long userId) {
-        return jpaUserRoomDao.findById(userId);
+    public boolean isUserParticipate(long userId) {
+        return jpaUserRoomDao.existsByUserId(userId);
     }
 
     @Override
@@ -44,7 +47,7 @@ public class DBRoomReader implements RoomReader {
                 .build();
     }
 
-    private Room mapToEntity(RoomRow roomRow) {
+    private Room mapToEntity(RoomRow roomRow, List<UserRoomRow> userRoomRows) {
         return Room.builder()
                 .id(roomRow.getId())
                 .title(roomRow.getTitle())
@@ -54,5 +57,18 @@ public class DBRoomReader implements RoomReader {
                 .createdAt(roomRow.getCreatedAt())
                 .updatedAt(roomRow.getUpdatedAt())
                 .build();
+    }
+
+    private boolean generateIsFull(RoomRow roomRow, List<UserRoomRow> userRoomRows) {
+        if (userRoomRows.isEmpty()) return false;
+
+        RoomTypes roomType = roomRow.getRoomType();
+        int userSizeOfRoom = userRoomRows.size();
+
+        if (roomType == RoomTypes.SINGLE) {
+            return userSizeOfRoom == 2;
+        } else {
+            return userSizeOfRoom == 4;
+        }
     }
 }

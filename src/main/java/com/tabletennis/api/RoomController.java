@@ -56,4 +56,16 @@ public class RoomController {
         var data = roomInfoGetter.getDetail(roomId);
         return ApiResponse.ok(data);
     }
+
+    /**
+     * 방 참가 API
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/room/attention/{roodId}")
+    public ApiResponse<Object> addAttention(
+            @PathVariable long roomId
+    ) {
+
+        return ApiResponse.okWithNoContent();
+    }
 }

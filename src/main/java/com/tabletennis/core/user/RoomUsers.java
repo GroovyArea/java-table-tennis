@@ -11,7 +11,6 @@ public class RoomUsers {
     private final RoomReader roomReader;
 
     public boolean hasRoom(long userId) {
-        boolean isPresent = roomReader.findBy(userId).isPresent();
-        return isPresent;
+        return roomReader.isUserParticipate(userId);
     }
 }
