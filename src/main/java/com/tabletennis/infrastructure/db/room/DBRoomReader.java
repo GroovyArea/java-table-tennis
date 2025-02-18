@@ -23,6 +23,11 @@ public class DBRoomReader implements RoomReader {
     }
 
     @Override
+    public Optional<Room> findRoomBy(long roomId) {
+        return jpaRoomDao.findById(roomId).map(this::mapToEntity);
+    }
+
+    @Override
     public PagedModel<Room> findAllBy(int page, int size) {
         var pageable = PageRequest.of(page, size);
         Page<RoomRow> roomRowPage = jpaRoomDao.findAll(pageable);
@@ -46,6 +51,8 @@ public class DBRoomReader implements RoomReader {
                 .host(roomRow.getHost())
                 .roomType(roomRow.getRoomType())
                 .status(roomRow.getStatus())
+                .createdAt(roomRow.getCreatedAt())
+                .updatedAt(roomRow.getUpdatedAt())
                 .build();
     }
 }

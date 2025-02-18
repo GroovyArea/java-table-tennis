@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 /**
  * room domain model
  */
@@ -22,6 +24,8 @@ public class Room implements PagedDomain {
     private long host;
     private RoomTypes roomType;
     private RoomStatus status;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
 
     public static Room of(
             String title, long host, RoomTypes roomType

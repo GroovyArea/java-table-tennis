@@ -2,6 +2,7 @@ package com.tabletennis.api;
 
 import com.tabletennis.api.command.CreateRoomRequest;
 import com.tabletennis.api.common.ApiResponse;
+import com.tabletennis.api.response.RoomDetailInfoResponse;
 import com.tabletennis.api.response.TotalRoomsResponse;
 import com.tabletennis.application.RoomCreator;
 import com.tabletennis.application.RoomInfoGetter;
@@ -41,6 +42,18 @@ public class RoomController {
             @RequestParam(defaultValue = "0") int page
     ) {
         var data = roomInfoGetter.getPaged(size, page);
+        return ApiResponse.ok(data);
+    }
+
+    /**
+     * 방 상세 조회 API
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/room/{roomId}")
+    public ApiResponse<RoomDetailInfoResponse> getRoomDetailInfo(
+            @PathVariable long roomId
+    ) {
+        var data = roomInfoGetter.getDetail(roomId);
         return ApiResponse.ok(data);
     }
 }
