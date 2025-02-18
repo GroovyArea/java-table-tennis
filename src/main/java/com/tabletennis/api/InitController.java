@@ -25,6 +25,6 @@ public class InitController {
             @RequestBody InitRequest request
     ) {
         initExecutor.execute(request.seed(), request.quantity());
-        return ApiResponse.ok(null);
+        return ApiResponse.okWithNoContent();
     }
 }

@@ -1,5 +1,6 @@
 package com.tabletennis.core.room;
 
+import com.tabletennis.core.common.PagedDomain;
 import com.tabletennis.core.room.vo.RoomStatus;
 import com.tabletennis.core.room.vo.RoomTypes;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Room {
+public class Room implements PagedDomain {
 
     private long id;
     private String title;
