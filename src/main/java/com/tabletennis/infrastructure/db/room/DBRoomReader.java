@@ -3,8 +3,8 @@ package com.tabletennis.infrastructure.db.room;
 import com.tabletennis.core.common.PagedModel;
 import com.tabletennis.core.room.Room;
 import com.tabletennis.core.room.RoomReader;
-import com.tabletennis.core.room.vo.RoomStatus;
 import com.tabletennis.core.room.vo.RoomTypes;
+import com.tabletennis.infrastructure.db.EntityBase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,17 +27,28 @@ public class DBRoomReader implements RoomReader {
 
     @Override
     public Optional<Room> findRoomBy(long roomId) {
-        return jpaRoomDao.findById(roomId).map(this::mapToEntity);
+        List<UserRoomRow> userRoomRows = jpaUserRoomDao.findAllByRoomId(roomId);
+        return jpaRoomDao.findById(roomId).map(roomRow ->
+                mapToEntity(roomRow, userRoomRows)
+        );
     }
 
     @Override
     public PagedModel<Room> findAllBy(int page, int size) {
         var pageable = PageRequest.of(page, size);
         Page<RoomRow> roomRowPage = jpaRoomDao.findAll(pageable);
+        List<RoomRow> roomRows = roomRowPage.getContent();
+        var roomIds = roomRows.stream().map(EntityBase::getId).toList();
+        List<UserRoomRow> userRoomRows = jpaUserRoomDao.findAllByRoomIdIn(roomIds);
 
         var rooms = roomRowPage.getContent()
                 .stream()
-                .map(this::mapToEntity)
+                .map(
+                        roomRow -> {
+                            var targetUserRoomRows = userRoomRows.stream().filter(userRoomRow -> userRoomRow.getRoomId() == roomRow.getId()).toList();
+                            return mapToEntity(roomRow, targetUserRoomRows);
+                        }
+                )
                 .toList();
 
         return PagedModel.<Room>builder()
@@ -54,6 +65,7 @@ public class DBRoomReader implements RoomReader {
                 .host(roomRow.getHost())
                 .roomType(roomRow.getRoomType())
                 .status(roomRow.getStatus())
+                .isFull(generateIsFull(roomRow, userRoomRows))
                 .createdAt(roomRow.getCreatedAt())
                 .updatedAt(roomRow.getUpdatedAt())
                 .build();
