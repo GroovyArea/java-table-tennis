@@ -1,4 +1,4 @@
-package com.tabletennis.infrastructure.db;
+package com.tabletennis.infrastructure.db.room;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

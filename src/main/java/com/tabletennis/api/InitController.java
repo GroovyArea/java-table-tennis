@@ -2,7 +2,7 @@ package com.tabletennis.api;
 
 import com.tabletennis.api.command.InitRequest;
 import com.tabletennis.api.common.ApiResponse;
-import com.tabletennis.api.usecase.InitExecutor;
+import com.tabletennis.application.InitExecutor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;

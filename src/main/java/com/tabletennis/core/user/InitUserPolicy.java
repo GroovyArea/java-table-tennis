@@ -1,7 +1,7 @@
 package com.tabletennis.core.user;
 
 import com.tabletennis.core.user.vo.UserStatus;
-import com.tabletennis.infrastructure.db.UserRow;
+import com.tabletennis.infrastructure.db.user.UserRow;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
