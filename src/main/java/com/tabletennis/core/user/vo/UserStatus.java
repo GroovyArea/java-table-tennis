@@ -1,4 +1,4 @@
-package com.tabletennis.core.user;
+package com.tabletennis.core.user.vo;
 
 public enum UserStatus {
 

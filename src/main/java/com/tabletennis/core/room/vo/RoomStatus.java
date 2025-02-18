@@ -1,4 +1,4 @@
-package com.tabletennis.core.room;
+package com.tabletennis.core.room.vo;
 
 public enum RoomStatus {
 
