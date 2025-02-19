@@ -44,9 +44,9 @@ public class RoomInfoGetter {
 
     private TotalRoomsResponse.Room toListResponse(Room room) {
         return TotalRoomsResponse.Room.builder()
-                .id((int) room.getId())
+                .id(room.getId().intValue())
                 .title(room.getTitle())
-                .hostId((int) room.getHost())
+                .hostId(room.getHost().intValue())
                 .roomType(room.getRoomType())
                 .status(room.getStatus())
                 .build();
@@ -54,9 +54,9 @@ public class RoomInfoGetter {
 
     private RoomDetailInfoResponse toDetailResponse(Room room) {
         return RoomDetailInfoResponse.builder()
-                .id((int) room.getId())
+                .id(room.getId().intValue())
                 .title(room.getTitle())
-                .hostId((int) room.getHost())
+                .hostId(room.getHost().intValue())
                 .roomType(room.getRoomType())
                 .status(room.getStatus())
                 .createdAt(room.getCreatedAt())

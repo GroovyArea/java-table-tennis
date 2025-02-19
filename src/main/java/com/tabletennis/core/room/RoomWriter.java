@@ -4,4 +4,5 @@ public interface RoomWriter {
 
     void deleteAll();
     Room createRoom(Room room);
+    Room addUser(Room room);
 }

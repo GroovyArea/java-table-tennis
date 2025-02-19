@@ -21,7 +21,7 @@ public class User implements PagedDomain {
     private static final int ACTIVE_STATUS_ID = 30;
     private static final int WAIT_STATUS_ID = 60;
 
-    private long id;
+    private Long id;
     private long fakerId;
     private String name;
     private String email;

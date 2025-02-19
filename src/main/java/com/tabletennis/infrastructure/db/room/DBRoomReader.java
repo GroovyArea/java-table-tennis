@@ -3,6 +3,7 @@ package com.tabletennis.infrastructure.db.room;
 import com.tabletennis.core.common.PagedModel;
 import com.tabletennis.core.room.Room;
 import com.tabletennis.core.room.RoomReader;
+import com.tabletennis.core.room.UserRoom;
 import com.tabletennis.core.room.vo.RoomTypes;
 import com.tabletennis.infrastructure.db.EntityBase;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +47,10 @@ public class DBRoomReader implements RoomReader {
                 .stream()
                 .map(
                         roomRow -> {
-                            var targetUserRoomRows = userRoomRows.stream().filter(userRoomRow -> userRoomRow.getRoomId() == roomRow.getId()).toList();
+                            var targetUserRoomRows = userRoomRows.stream()
+                                    .filter(userRoomRow -> userRoomRow.getRoomId() == roomRow.getId())
+                                    .toList();
+
                             return mapToEntity(roomRow, targetUserRoomRows);
                         }
                 )
@@ -59,28 +64,32 @@ public class DBRoomReader implements RoomReader {
     }
 
     private Room mapToEntity(RoomRow roomRow, List<UserRoomRow> userRoomRows) {
-        return Room.builder()
+        var userRooms = userRoomRows.stream()
+                .map(this::mapToEntity)
+                .toList();
+
+        List<UserRoom> savedUserRooms = new ArrayList<>(userRooms);
+
+        Room room = Room.builder()
                 .id(roomRow.getId())
                 .title(roomRow.getTitle())
                 .host(roomRow.getHost())
                 .roomType(roomRow.getRoomType())
                 .status(roomRow.getStatus())
-                .isFull(generateIsFull(roomRow, userRoomRows))
+                .userRooms(savedUserRooms)
                 .createdAt(roomRow.getCreatedAt())
                 .updatedAt(roomRow.getUpdatedAt())
                 .build();
+
+        return room;
     }
 
-    private boolean generateIsFull(RoomRow roomRow, List<UserRoomRow> userRoomRows) {
-        if (userRoomRows.isEmpty()) return false;
-
-        RoomTypes roomType = roomRow.getRoomType();
-        int userSizeOfRoom = userRoomRows.size();
-
-        if (roomType == RoomTypes.SINGLE) {
-            return userSizeOfRoom == 2;
-        } else {
-            return userSizeOfRoom == 4;
-        }
+    private UserRoom mapToEntity(UserRoomRow userRoomRow) {
+        return UserRoom.builder()
+                .id(userRoomRow.getId())
+                .userId(userRoomRow.getUserId())
+                .roomId(userRoomRow.getRoomId())
+                .userRoomTeams(userRoomRow.getTeam())
+                .build();
     }
 }
