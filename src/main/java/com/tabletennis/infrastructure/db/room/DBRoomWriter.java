@@ -43,6 +43,22 @@ public class DBRoomWriter implements RoomWriter {
         return room;
     }
 
+    @Override
+    @Transactional
+    public Room deleteUsers(Room room, List<Long> userIds) {
+        Long roomId = room.getId();
+
+        jpaUserRoomDao.findAllByRoomId(room.getId()).stream()
+                .filter(userRoom -> userIds.contains(userRoom.getUserId()))
+                .toList()
+                .forEach(userRoomRow -> jpaUserRoomDao.deleteAllByRoomIdAndUserId(roomId, userRoomRow.getUserId()));
+
+        RoomRow roomRow = mapToRow(room);
+        jpaRoomDao.save(roomRow);
+
+        return room;
+    }
+
     private RoomRow mapToRow(Room room) {
         RoomRow roomRow = RoomRow.builder()
                 .title(room.getTitle())

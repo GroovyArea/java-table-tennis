@@ -2,9 +2,11 @@ package com.tabletennis.api;
 
 import com.tabletennis.api.command.AttentionRoomRequest;
 import com.tabletennis.api.command.CreateRoomRequest;
+import com.tabletennis.api.command.RoomOutRequest;
 import com.tabletennis.api.common.ApiResponse;
 import com.tabletennis.api.response.RoomDetailInfoResponse;
 import com.tabletennis.api.response.TotalRoomsResponse;
+import com.tabletennis.application.LeaveRoom;
 import com.tabletennis.application.ParticipateRoom;
 import com.tabletennis.application.RoomCreator;
 import com.tabletennis.application.RoomInfoGetter;
@@ -22,6 +24,7 @@ public class RoomController {
     private final RoomCreator roomCreator;
     private final RoomInfoGetter roomInfoGetter;
     private final ParticipateRoom participateRoom;
+    private final LeaveRoom leaveRoom;
 
     /**
      * 방 생성 API
@@ -70,6 +73,19 @@ public class RoomController {
             @RequestBody AttentionRoomRequest request
     ) {
         participateRoom.participate(roomId, request.userId());
+        return ApiResponse.okWithNoContent();
+    }
+
+    /**
+     * 방 나가기 API
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/room/out/{roomId}")
+    public ApiResponse<Object> removeAttention(
+            @PathVariable long roomId,
+            @RequestBody RoomOutRequest request
+    ) {
+        leaveRoom.leave(request.userId(), roomId);
         return ApiResponse.okWithNoContent();
     }
 }

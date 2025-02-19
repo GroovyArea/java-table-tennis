@@ -74,4 +74,23 @@ public class Room implements PagedDomain {
     public void addUserRoom(UserRoom newUserRoom) {
         this.userRooms.add(newUserRoom);
     }
+
+    public boolean canLeave() {
+        return this.status == RoomStatus.PROGRESS;
+    }
+
+    public boolean isUserJoined(long userId) {
+        return this.userRooms.stream()
+                .map(UserRoom::getUserId)
+                .toList()
+                .contains(userId);
+    }
+
+    public boolean isHost(long userId) {
+        return this.host.equals(userId);
+    }
+
+    public void finish() {
+        this.status = RoomStatus.FINISH;
+    }
 }
