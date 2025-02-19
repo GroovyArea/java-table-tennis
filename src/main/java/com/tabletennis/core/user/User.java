@@ -18,11 +18,38 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class User implements PagedDomain {
 
-    private long id;
+    private static final int ACTIVE_STATUS_ID = 30;
+    private static final int WAIT_STATUS_ID = 60;
+
+    private Long id;
     private long fakerId;
     private String name;
     private String email;
     private UserStatus status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public static User of(long fakerId, String name, String email) {
+        return User.builder()
+                .fakerId(fakerId)
+                .name(name)
+                .email(email)
+                .build();
+    }
+
+    public boolean isActive() {
+        return status == UserStatus.ACTIVE;
+    }
+
+    public User ofWithStatus() {
+        if (fakerId <= ACTIVE_STATUS_ID) {
+            this.status = UserStatus.ACTIVE;
+        } else if (fakerId <= WAIT_STATUS_ID) {
+            this.status = UserStatus.WAIT;
+        } else {
+            this.status = UserStatus.NON_ACTIVE;
+        }
+
+        return this;
+    }
 }

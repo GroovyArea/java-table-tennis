@@ -1,9 +1,11 @@
 package com.tabletennis.api;
 
+import com.tabletennis.api.command.AttentionRoomRequest;
 import com.tabletennis.api.command.CreateRoomRequest;
 import com.tabletennis.api.common.ApiResponse;
 import com.tabletennis.api.response.RoomDetailInfoResponse;
 import com.tabletennis.api.response.TotalRoomsResponse;
+import com.tabletennis.application.ParticipateRoom;
 import com.tabletennis.application.RoomCreator;
 import com.tabletennis.application.RoomInfoGetter;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ public class RoomController {
 
     private final RoomCreator roomCreator;
     private final RoomInfoGetter roomInfoGetter;
+    private final ParticipateRoom participateRoom;
 
     /**
      * 방 생성 API
@@ -55,5 +58,18 @@ public class RoomController {
     ) {
         var data = roomInfoGetter.getDetail(roomId);
         return ApiResponse.ok(data);
+    }
+
+    /**
+     * 방 참가 API
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/room/attention/{roomId}")
+    public ApiResponse<Object> addAttention(
+            @PathVariable long roomId,
+            @RequestBody AttentionRoomRequest request
+    ) {
+        participateRoom.participate(roomId, request.userId());
+        return ApiResponse.okWithNoContent();
     }
 }

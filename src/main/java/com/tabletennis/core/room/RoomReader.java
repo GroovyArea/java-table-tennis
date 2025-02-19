@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface RoomReader {
 
-    Optional<UserRoomRow> findBy(long userId);
+    boolean isUserParticipate(long userId);
 
     Optional<Room> findRoomBy(long roomId);
 

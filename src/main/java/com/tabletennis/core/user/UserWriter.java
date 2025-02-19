@@ -7,5 +7,5 @@ import java.util.List;
 public interface UserWriter {
 
     void deleteAll();
-    void saveAll(List<UserRow> userRows);
+    void saveAll(List<User> users);
 }

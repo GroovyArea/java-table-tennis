@@ -15,9 +15,9 @@ public record TotalRoomsResponse(
 
     @Builder
     public record Room(
-            int id,
+            Integer id,
             String title,
-            int hostId,
+            Integer hostId,
             RoomTypes roomType,
             RoomStatus status
     ) {
