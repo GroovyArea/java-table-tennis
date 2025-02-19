@@ -59,6 +59,14 @@ public class DBRoomWriter implements RoomWriter {
         return room;
     }
 
+    @Override
+    public Room saveRoom(Room room) {
+        RoomRow roomRow = mapToRow(room);
+        jpaRoomDao.save(roomRow);
+
+        return room;
+    }
+
     private RoomRow mapToRow(Room room) {
         RoomRow roomRow = RoomRow.builder()
                 .title(room.getTitle())
