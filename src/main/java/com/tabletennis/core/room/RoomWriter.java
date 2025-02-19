@@ -8,4 +8,5 @@ public interface RoomWriter {
     Room createRoom(Room room);
     Room addUser(Room room);
     Room deleteUsers(Room room, List<Long> userIds);
+    Room saveRoom(Room room);
 }

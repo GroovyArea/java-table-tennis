@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -92,5 +91,13 @@ public class Room implements PagedDomain {
 
     public void finish() {
         this.status = RoomStatus.FINISH;
+    }
+
+    public boolean canStart() {
+        return this.status == RoomStatus.WAIT && this.isFull();
+    }
+
+    public void start() {
+        this.status = RoomStatus.PROGRESS;
     }
 }
