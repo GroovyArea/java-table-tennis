@@ -1,5 +1,6 @@
 package com.tabletennis.core.room;
 
+import com.tabletennis.application.ChangeTeam;
 import com.tabletennis.core.room.vo.UserRoomTeams;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,4 +17,8 @@ public class UserRoom {
     private long roomId;
     private long userId;
     private UserRoomTeams userRoomTeams;
+
+    public void changeTeam(UserRoomTeams targetTeam) {
+        this.userRoomTeams = targetTeam;
+    }
 }

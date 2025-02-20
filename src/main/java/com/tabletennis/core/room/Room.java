@@ -70,6 +70,14 @@ public class Room implements PagedDomain {
         }
     }
 
+    public int getCapacity() {
+        if (this.roomType == RoomTypes.SINGLE) {
+            return 2;
+        } else {
+            return 4;
+        }
+    }
+
     public void addUserRoom(UserRoom newUserRoom) {
         this.userRooms.add(newUserRoom);
     }
@@ -93,11 +101,11 @@ public class Room implements PagedDomain {
         this.status = RoomStatus.FINISH;
     }
 
-    public boolean canStart() {
-        return this.status == RoomStatus.WAIT && this.isFull();
-    }
-
     public void start() {
         this.status = RoomStatus.PROGRESS;
+    }
+
+    public boolean canStart() {
+        return this.status == RoomStatus.WAIT && this.isFull();
     }
 }
