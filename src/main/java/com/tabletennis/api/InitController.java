@@ -21,7 +21,7 @@ public class InitController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/init")
-    public ApiResponse<Object> init(
+    public ApiResponse<Void> init(
             @RequestBody InitRequest request
     ) {
         initExecutor.execute(request.seed(), request.quantity());

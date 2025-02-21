@@ -31,7 +31,7 @@ public class RoomController {
      */
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/room")
-    public ApiResponse<Object> createRoom(
+    public ApiResponse<Void> createRoom(
             @RequestBody CreateRoomRequest request
     ) {
         roomCreator.create(request);
@@ -68,7 +68,7 @@ public class RoomController {
      */
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/room/attention/{roomId}")
-    public ApiResponse<Object> addAttention(
+    public ApiResponse<Void> addAttention(
             @PathVariable long roomId,
             @RequestBody AttentionRoomRequest request
     ) {
@@ -81,7 +81,7 @@ public class RoomController {
      */
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/room/out/{roomId}")
-    public ApiResponse<Object> removeAttention(
+    public ApiResponse<Void> removeAttention(
             @PathVariable long roomId,
             @RequestBody RoomOutRequest request
     ) {

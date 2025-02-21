@@ -21,7 +21,7 @@ public class TeamController {
      */
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/team/{roomId}")
-    public ApiResponse<Object> changeTeam(
+    public ApiResponse<Void> changeTeam(
             @PathVariable long roomId,
             @RequestBody ChangeTeamRequest request
     ) {

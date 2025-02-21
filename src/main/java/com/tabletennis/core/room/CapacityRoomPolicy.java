@@ -1,11 +1,9 @@
 package com.tabletennis.core.room;
 
 import com.tabletennis.core.room.vo.UserRoomTeams;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class CapacityRoomPolicy {
 
     public boolean isValid(Room room, UserRoomTeams targetTeam) {

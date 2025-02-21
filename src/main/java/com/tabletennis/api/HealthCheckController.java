@@ -14,7 +14,7 @@ public class HealthCheckController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/health")
-    public ApiResponse<Object> health() {
+    public ApiResponse<Void> health() {
         return ApiResponse.okWithNoContent();
     }
 }
