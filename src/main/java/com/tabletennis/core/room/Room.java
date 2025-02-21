@@ -21,6 +21,9 @@ import java.util.List;
 @Builder
 public class Room implements PagedDomain {
 
+    private static final int FULL_SIZE_OF_SINGLE = 2;
+    private static final int FULL_SIZE_OF_DOUBLE = 4;
+
     private Long id;
     private String title;
     private Long host;
@@ -51,9 +54,9 @@ public class Room implements PagedDomain {
         int userSizeOfRoom = userRooms.size();
 
         if (roomType == RoomTypes.SINGLE) {
-            return userSizeOfRoom == 2;
+            return userSizeOfRoom == FULL_SIZE_OF_SINGLE;
         } else {
-            return userSizeOfRoom == 4;
+            return userSizeOfRoom == FULL_SIZE_OF_DOUBLE;
         }
     }
 
@@ -64,17 +67,17 @@ public class Room implements PagedDomain {
                 .size();
 
         if (roomType == RoomTypes.SINGLE) {
-            return userSizeOfRoom == 1;
+            return userSizeOfRoom == FULL_SIZE_OF_SINGLE / 2;
         } else {
-            return userSizeOfRoom == 2;
+            return userSizeOfRoom == FULL_SIZE_OF_DOUBLE / 2;
         }
     }
 
     public int getCapacity() {
         if (this.roomType == RoomTypes.SINGLE) {
-            return 2;
+            return FULL_SIZE_OF_SINGLE;
         } else {
-            return 4;
+            return FULL_SIZE_OF_DOUBLE;
         }
     }
 
