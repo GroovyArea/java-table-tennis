@@ -21,7 +21,7 @@ public class GameController {
      */
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/room/start/{roomId}")
-    public ApiResponse<Object> startRoom(
+    public ApiResponse<Void> startRoom(
             @PathVariable long roomId,
             @RequestBody StartGameRequest request
     ) {
