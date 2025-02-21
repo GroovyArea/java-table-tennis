@@ -13,6 +13,7 @@
 ### application
 
 - 외부 요청의 business logic 을 처리하는 usecase
+- domain service 를 의존하여 일련의 외부 요구 사항을 처리합니다.
 
 ### core
 
