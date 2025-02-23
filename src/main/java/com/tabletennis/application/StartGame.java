@@ -2,7 +2,7 @@ package com.tabletennis.application;
 
 import com.tabletennis.api.common.ApiErrorException;
 import com.tabletennis.api.common.MetaCode;
-import com.tabletennis.core.StartRoomPolicy;
+import com.tabletennis.core.room.StartRoomPolicy;
 import com.tabletennis.core.room.Room;
 import com.tabletennis.core.room.RoomReader;
 import com.tabletennis.core.room.RoomWriter;

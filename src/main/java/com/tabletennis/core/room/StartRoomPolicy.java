@@ -1,6 +1,5 @@
-package com.tabletennis.core;
+package com.tabletennis.core.room;
 
-import com.tabletennis.core.room.Room;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
